@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class MainClass {
 
-    public static Table solve(Table tablo1) {
+    public static boolean solve(Table tablo1) {
         tablo1.updateUnsolved();
         ArrayList<Table.Element> list;
         list = tablo1.getUnsolved();
@@ -15,23 +15,23 @@ public class MainClass {
         //System.out.println(tablo1.numberOfUnsolved);
         if (list.isEmpty()) {
             //System.out.print("son ");
-            return tablo1;
+            return true;
         } else if (list.
                 get(0).getPossibles().isEmpty()) {
-            return null;
+            return false;
         } else {
 
             for (Object possible : list.
                     get(0).getPossibles()) {
                 list.get(0).setValue((int) possible);
-                if (solve(tablo1) == null) {
+                if (solve(tablo1) == false) {
                     list.get(0).setValue(0);
                 } else {
-                    return tablo1;
+                    return true;
                 }
 
             }
-            return null;
+            return false;
         }
 
     }
@@ -66,7 +66,8 @@ public class MainClass {
 
         System.out.println(tablo1);
         long time = System.nanoTime();
-        System.out.println(solve(tablo1));
+        solve(tablo1);
+        System.out.println(tablo1);
         time = System.nanoTime() - time;
         DecimalFormat formatter = new DecimalFormat("#0.00");
         System.out.println("  Elapsed Time: " + 
