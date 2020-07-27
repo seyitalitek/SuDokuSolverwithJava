@@ -21,6 +21,7 @@ public class Table {
             dizi[i][j].setValue(neu);
         }
     }
+
     @Override
     public String toString() {
         int satno = 0;
@@ -93,6 +94,37 @@ public class Table {
         return unsolveds;
     }
 
+    public boolean solve() {
+        this.updateUnsolved();
+        ArrayList<Table.Element> list;
+        list = this.getUnsolved();
+        if (!list.isEmpty()) {
+            list.get(0).buildPossibles();
+        }
+        //System.out.println(this.numberOfUnsolved);
+        if (list.isEmpty()) {
+            //System.out.print("son ");
+            return true;
+        } else if (list.
+                get(0).getPossibles().isEmpty()) {
+            return false;
+        } else {
+
+            for (Object possible : list.
+                    get(0).getPossibles()) {
+                list.get(0).setValue((int) possible);
+                if (this.solve() == false) {
+                    list.get(0).setValue(0);
+                } else {
+                    return true;
+                }
+
+            }
+            return false;
+        }
+
+    }
+
     public class Element implements Comparable<Element> {
 
         private final int[] digits = {1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -110,7 +142,6 @@ public class Table {
             this.value = neu;
             this.smallsq = (this.column / 3) + (this.row / 3) * 3;
         }
-
 
         public int getValue() {
             return this.value;
@@ -168,13 +199,11 @@ public class Table {
         public ArrayList getPossibles() {
             return this.possibles;
         }
-        
-
 
         @Override
         public int compareTo(Element o) {
-            return ((o.nOfPossibles == this.nOfPossibles) ? 0 : 
-                    ((o.nOfPossibles < this.nOfPossibles) ? 1 : -1));
+            return ((o.nOfPossibles == this.nOfPossibles) ? 0
+                    : ((o.nOfPossibles < this.nOfPossibles) ? 1 : -1));
         }
     }
 
