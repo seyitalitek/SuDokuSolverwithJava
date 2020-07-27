@@ -1,11 +1,8 @@
 package SudokuSolver;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 
 public class MainClass {
-
- 
 
     public static void main(String[] args) {
 
@@ -33,20 +30,18 @@ public class MainClass {
         tablo1.setEleman(8, 1, 9);
         tablo1.setEleman(8, 6, 4);
 
-
-
         System.out.println(tablo1);
         long time = System.nanoTime();
         if (tablo1.solve()) {
             System.out.println(tablo1);
-        }   else {
+        } else {
             System.out.println("Invalid Sudoku");
         }
-        
+
         time = System.nanoTime() - time;
         DecimalFormat formatter = new DecimalFormat("#0.00");
-        System.out.println("  Elapsed Time: " + 
-                      formatter.format(time/1_000_000_000D) + " seconds\n");
+        System.out.println("  Elapsed Time: "
+                + formatter.format(time / 1_000_000_000D) + " seconds\n");
 
     }
 
