@@ -37,8 +37,12 @@ public class MainClass {
 
         System.out.println(tablo1);
         long time = System.nanoTime();
-        tablo1.solve();
-        System.out.println(tablo1);
+        if (tablo1.solve()) {
+            System.out.println(tablo1);
+        }   else {
+            System.out.println("Invalid Sudoku");
+        }
+        
         time = System.nanoTime() - time;
         DecimalFormat formatter = new DecimalFormat("#0.00");
         System.out.println("  Elapsed Time: " + 
