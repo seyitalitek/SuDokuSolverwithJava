@@ -1,4 +1,4 @@
-package com.solver.Sudoku;
+package SudokuSolver;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
